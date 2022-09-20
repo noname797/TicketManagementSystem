@@ -1,0 +1,52 @@
+/* Fontss */
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
+
+body {
+	font-family: "Roboto", sans-serif;
+	margin: 5% 0;
+	padding: 0;
+  color: #847dff;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+
+.container{
+
+	margin: 0px !important;
+	padding: 0;
+	max-width: 100%;
+}
+.row{
+	margin: 0;
+	padding: 0;
+}
+
+  
+  i:not(i.fa-eye) {
+	color:white;
+  }
+  
+  ul {
+	list-style: hangul-consonant;
+	text-align:left;
+	margin-left: -10rem;
+  }
+  
+  .error {
+	border: 2px solid red;
+  }
+  
+
+
+
+
+
+
+
+

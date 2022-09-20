@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- For Icons-->
+    <link rel="stylesheet" href="{% static 'signuppage/fonts/icomoon/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'signuppage/css/bootstrap.min.css' %}" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'signuppage/css/signup_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'signuppage/css/datepicker.css' %}" />
+
+     <title>Sign up</title>
+  </head>
+  <body>
+    <section id="contact">
+
+        <div class="container-lg">
+          
+          <div class="mb-1 mt-3 text-center">
+            <h1>Sign Up</h1>
+          </div>
+          <div class="row justify-content-center my-3">
+            <div class="col-lg-6">
+              
+              <form action="#" method="post">
+                <label for="psno" class="form-label">PS No.</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-user" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <input type="text" id="psno" name="psno" class="form-control" maxlength="10" pattern="\d*" title="Enter number only" required/>
+                </div>
+                <label for="name" class="form-label">Name</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-user" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <input type="text" id="name" name="name" class="form-control" maxlength="50" pattern="[a-zA-Z ]*" title="Enter alphabets only" required/>
+                </div>
+                
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-envelope" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <input type="email" id="email" name="email" class="form-control" required/>
+                </div> 
+
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-lock" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <input type="password" id="password" name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onkeyup="check()"  required/>
+                </div> 
+
+                <label for="confirmpassword" class="form-label">Confirm Password</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-lock" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <input type="password" id="confirmpassword" name="confirmpassword" class="form-control" onkeyup="check()" required/>
+                </div> 
+
+
+
+
+                <div>
+                  {% if error %}
+                  <p style="color:red ;" > {{error}}</p>
+                  {% endif %}
+                </div>
+
+                <div id="message" ></div>
+
+                <div class="mb-4 text-center">
+                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="leave" value="Apply Leave">Register</button> <a href="#" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    <!-- Calendar -->
+
+<script src="{% static 'signuppage/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'signuppage/js/popper.min.js' %}"></script>
+<script src="{% static 'signuppage/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'signuppage/js/main.js' %}"></script>
+<script src="{% static 'signuppage//js/datepicker.js' %}"></script>
+<script>
+
+      $(document).ready(function () {
+
+        $("#startdate").datepicker({
+
+          dateFormat: "yy-mm-dd",
+
+          minDate: 0,
+
+          onSelect: function (date) {
+
+            var dt2 = $("#enddate");
+
+            var startDate = $(this).datepicker("getDate");
+
+            var minDate = $(this).datepicker("getDate");
+
+            dt2.datepicker("setDate", minDate);
+
+            startDate.setDate(startDate.getDate() + 30);
+
+            //sets dt2 maxDate to the last day of 30 days window
+
+            dt2.datepicker("option", "maxDate", startDate);
+
+            dt2.datepicker("option", "minDate", minDate);
+
+            $(this).datepicker("option", "minDate", minDate);
+
+          },
+
+        });
+
+        $("#enddate").datepicker({
+
+          dateFormat: "yy-mm-dd",
+          minDate: 0,
+          });
+
+      });
+
+  </script>
+</body>
+</html>

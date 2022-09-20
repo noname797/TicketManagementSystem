@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Admin',
     'Employee',
     'Login',
+    'Tickets'
 ]
 
 MIDDLEWARE = [

@@ -25,11 +25,11 @@ class SubCategory(models.Model):
     slug=models.SlugField(unique=True, null=True, blank= True)
 
     def save(self, *args,**kwargs):
-        self.slug =slugify(self.category_name)
+        self.slug =slugify(self.subcategory)
         super(SubCategory, self).save(*args,**kwargs)
 
     def __str__(self):
-        return self.subCategory +"under" + self.category.category
+        return self.subcategory +"under" + self.category.category
 
 
 class Ticket(models.Model):
@@ -50,5 +50,5 @@ class Ticket(models.Model):
         super(Ticket, self).save(*args,**kwargs)
 
     def __str__(self):
-        return self.status + "and" + self.ticket_id + "and" + self.user_id.id
+        return str(self.status + " ticket ID:  " + str(self.ticket_id) + " from PS no. :" + str(self.user_id.ps_number))
 

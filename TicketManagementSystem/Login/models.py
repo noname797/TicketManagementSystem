@@ -12,7 +12,7 @@ class Profile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_admin = models.BooleanField(default=False)
     def __str__(self):
-        return self.ps_number
+        return str(self.ps_number)
 
     # class Meta:
     #     abstract = True

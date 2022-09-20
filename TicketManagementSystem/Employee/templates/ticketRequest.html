@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- For Icons-->
+    <link rel="stylesheet" href="{% static 'ticketRequest/fonts/icomoon/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'ticketRequest/css/bootstrap.min.css' %}" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'ticketRequest/css/request_style.css' %}" />
+
+     <title>Raise Ticket</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+      <a class="navbar-brand navbar-logo" href="#">
+        <img src="{% static 'ticketRequest/images/lti.svg' %}" alt="LTI logo" width="10%" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars text-white"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <div class="hori-selector">
+            <div class="left"></div>
+            <div class="right"></div>
+          </div>
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              ><i class="fa-sharp fa-solid fa-chart-line"  style="color:#5161ce"></i>Raise Ticket</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"
+              ><i class="fa-solid fa-message"  style="color:#5161ce"></i>Ticket History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'employee:reset' %}"
+              ><i class="fa-solid fa-right-from-bracket"></i>Log out</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <section id="contact">
+
+        <div class="container-lg">
+          
+          <div class="mb-1 mt-3 text-center">
+            <h1>Raise a ticket</h1>
+          </div>
+          <div class="row justify-content-center my-3">
+            <div class="col-lg-6">
+              
+              <form action="addticket/" method="post">
+              <!---  {% csrf_token %} -->
+                <label for="psno" class="form-label">PS No.</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-user" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <!-- {%for x in emp %} -->
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.username}}
+                  <!-- {% endfor %} -->
+
+                </div>
+
+                <label for="email" class="form-label">Email ID</label>
+                <div class="input-group mb-4">
+                  <span class="input-group-text">
+                    <i class="fa fa-envelope" aria-hidden="true" style="color:black"></i>
+                  </span>
+                  <!-- {%for x in emp %} -->
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.email}}
+                  <!-- {% endfor %} -->
+
+                </div>
+                
+                <label for="categories"> Category</label>
+                
+                <div class="mb-4 input-group">
+                <span class="input-group-text">
+                    <i class="fa fa-folder" aria-hidden="true" style="color:black"></i>
+                  </span>
+                 
+                      <select name="categories" id="categories" class="form-control" title="Please select a category" required>
+                          <option value="" disabled selected>- - - - - - Categories - - - - -</option>
+                          <option value="cat1">Cat 1</option>
+                          <option value="cat2">Cat 2</option>
+                          <option value="cat3">Cat 3</option>
+                          <option value="cat4">Cat 4</option>
+                      </select>
+                </div>
+
+                <label for="subcategories">Sub Category</label>
+                <div class="mb-4 input-group">
+                <span class="input-group-text">
+                    <i class="fa fa-folder-open" aria-hidden="true" style="color:black"></i>
+                  </span>
+                 
+                      <select name="categories" id="categories" class="form-control" title="Please select a sub category" required>
+                          <option  selected disabled value="">- - - - - Sub categories - - - - - -</option>
+                          <option value="subcat1">SubCat 1</option>
+                          <option value="subcat2">SubCat 2</option>
+                          <option value="subcat3">SubCat 3</option>
+                          <option value="subcat4">SubCat 4</option>
+                      </select>
+                </div>
+
+                <label for="description">Description</label>
+
+                <div class="mb-4 mt-3 form-floating">
+                
+                  
+                  <textarea class="form-control" id="reason" name="reason" style="resize:none;" required></textarea>
+                </div>
+                <div>
+                  {% if error %}
+                  <p style="color:red ;" > {{error}}</p>
+                  {% endif %}
+                </div>
+                <div class="mb-4 text-center">
+                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="leave" value="Apply Leave">Raise ticket</button> <a href="#" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+<script src="{% static 'ticketRequest/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'ticketRequest/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'ticketRequest/js/requests_main.js' %}"></script>
+</body>
+</html>

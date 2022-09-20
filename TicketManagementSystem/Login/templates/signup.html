@@ -26,7 +26,6 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'signuppage/css/signup_style.css' %}" />
-    <link rel="stylesheet" href="{% static 'signuppage/css/datepicker.css' %}" />
 
      <title>Sign up</title>
   </head>
@@ -93,7 +92,7 @@
                 <div id="message" ></div>
 
                 <div class="mb-4 text-center">
-                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="leave" value="Apply Leave">Register</button> <a href="#" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
+                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="leave" value="Apply Leave">Register</button> <a href="{% url 'login:reset' %}" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
 
                 </div>
               </form>
@@ -101,56 +100,9 @@
           </div>
         </div>
       </section>
-      
-    <!-- Calendar -->
-
-<script src="{% static 'signuppage/js/jquery-3.3.1.min.js' %}"></script>
-<script src="{% static 'signuppage/js/popper.min.js' %}"></script>
-<script src="{% static 'signuppage/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'signuppage/js/main.js' %}"></script>
-<script src="{% static 'signuppage//js/datepicker.js' %}"></script>
-<script>
-
-      $(document).ready(function () {
-
-        $("#startdate").datepicker({
-
-          dateFormat: "yy-mm-dd",
-
-          minDate: 0,
-
-          onSelect: function (date) {
-
-            var dt2 = $("#enddate");
-
-            var startDate = $(this).datepicker("getDate");
-
-            var minDate = $(this).datepicker("getDate");
-
-            dt2.datepicker("setDate", minDate);
-
-            startDate.setDate(startDate.getDate() + 30);
-
-            //sets dt2 maxDate to the last day of 30 days window
-
-            dt2.datepicker("option", "maxDate", startDate);
-
-            dt2.datepicker("option", "minDate", minDate);
-
-            $(this).datepicker("option", "minDate", minDate);
-
-          },
-
-        });
-
-        $("#enddate").datepicker({
-
-          dateFormat: "yy-mm-dd",
-          minDate: 0,
-          });
-
-      });
-
-  </script>
+  <script src="{% static 'signuppage/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'signuppage/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'signuppage/js/signup_main.js' %}"></script>
+  
 </body>
 </html>

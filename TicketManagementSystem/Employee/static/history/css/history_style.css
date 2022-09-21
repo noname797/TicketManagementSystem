@@ -184,121 +184,6 @@ i {
 		left: -25px;
 	}
 }
-/* 
-Calendar CSS */
-#content{
-
-	margin-top: 10%;
-}
-  
-  #header {
-	padding: 10px;
-	color: rgb(205 92 92);
-	font-weight: bold;
-	font-size: 26px;
-	font-family: sans-serif;
-	display: flex;
-	justify-content: space-around;
-	background-color:rgba(209,226,235,0.25);
-  }
-  #header button {
-	background-color:#92a1d1;
-	border-color:inherit;
-  }
-  #container {
-	width: 100%;
-  }
-  #weekdays {
-	color: #247BA0;
-	text-align:center;
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-  }
-  #weekdays div {
-	width: 100px;
-	padding: 10px;
-  }
-  #calendar {
-	width: 100%;
-	margin: auto;
-	display: flex;
-	flex-wrap: wrap;
-  }
-  .day {
-	text-align:center;
-	width: 100px;
-	padding: 10px;
-	height: 100px;
-	cursor: pointer;
-	box-sizing: border-box;
-	background-color: white;
-	margin: 5px;
-	box-shadow: 0px 0px 3px #CBD4C2;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-  }
-  .day:hover {
-	background-color: #e8faed;
-  }
-  
-  .day + #currentDay {
-	background-color:#e8f4fa;
-  }
-  #currentDay {
-	color: rgb(205 92 92);
-	font-weight: bold;
-  }
-  .event {
-	font-size: 10px;
-	padding: 3px;
-	background-color: #58bae4;
-	color: white;
-	border-radius: 5px;
-	max-height: 55px;
-	overflow: hidden;
-  }
-  .padding {
-	cursor: default !important;
-	background-color: #FFFCFF !important;
-	box-shadow: none !important;
-  }
-  .card.newEventModal {
-	display: none;
-	z-index: 20;
-	position: absolute;
-	padding: 25px;
-	background-color: rgba(209,226,235,1);;
-	width: 350px;
-	top: 100px;
-	left: calc(50% - 175px);
-	font-family: sans-serif; 
-  }
-  .eventTitleInput, .eventTitleInput02 {
-	padding: 10px;
-	width: 100%;
-	box-sizing: border-box;
-	margin-bottom: 25px;
-	border-radius: 3px;
-	outline: none;
-	border: none;
-	box-shadow: 0px 0px 3px gray;
-  }
-  eventTitleInput.error, .eventTitleInput02.error {
-	border: 2px solid red;
-  }
-  #modalBackDrop {
-	top: 0px;
-	left: 0px;
-	height: 100vh;
-	background-color: rgba(0,0,0,0.8);
-	width: 100vw;
-	display: none;
-	z-index: 10;
-	position: absolute;
-  }
-  
   i:not(i.fa-eye) {
 	color:white;
   }
@@ -315,8 +200,85 @@ Calendar CSS */
   
 
 
+/* 
+Leave desciption */
 
+  
+header {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	}
+	  
+	h1 {
+	margin: 0;
+	}
+	
+	a {
+	text-decoration: none;
+	}
+	
+	img {
+	max-width: 100%;
+	height: auto;
+	}
+	  
+	.drop {
+	margin-top: 15%;
+	display: grid;
+	align-items: center;
+	justify-content: center;
 
+	}
+	
+	.drop__container{
+		display: grid;
+		row-gap: 1rem;
+		padding: 1.5rem;
+		box-shadow: 4px 4px 16px #e1e1e1;
+		border-radius: 1rem;
+	
+	}
+	
+	.drop__list{
+		display: grid;
+		row-gap: 1rem;
+	}
+	
+	
+	.drop__data{
+		margin-top: 0%;
+		display: flex;
+		align-items: center;
+	
+	}
+	
+	#drop__card{
+		margin-top: 1%;
+		width: 100%;
+		justify-content: space-between;
+		padding: 0.75rem 1.25rem 0.75rem 0.75rem;
+		background-color: #f8f8fc;
+		box-shadow: 4px 4px 16px #e1e1e1, -2px -2px 16px #fff;
+		border-radius: 1rem;
+	}
+	
+	
+	.drop__name{
+		font-size: 1.5rem;
+		color: #272a3a;
+		font-weight: 500;
+	
+	}
+	
+	.drop__description{
+		font-size: 0.813rem;
+		color: #8a8eaa;
+	}
+	
+	
+	
+	  
 
 
 

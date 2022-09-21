@@ -41,8 +41,8 @@ class Ticket(models.Model):
     # ticket_id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     user_id = models.ForeignKey(Profile,related_name='user',on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=ticket_status)
-    category = models.ForeignKey(Category,related_name='categoryT',on_delete=models.CASCADE) # in case future error arises convert it to char field
-    subCategory = models.ForeignKey(SubCategory,related_name='subcategoryT',on_delete=models.CASCADE)
+    category = models.CharField(max_length=100) # in case future error arises convert it to char field
+    subCategory = models.CharField(max_length=100)
     description = models.TextField()
     issue_date = models.DateField(auto_now_add=True)
 

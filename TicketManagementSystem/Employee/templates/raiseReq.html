@@ -49,12 +49,12 @@
             <div class="right"></div>
           </div>
           <li class="nav-item active">
-            <a class="nav-link" href="{% url 'employee:raiseReq' %}"
+            <a class="nav-link" href="{% url 'employee:raiseReq' id %}"
               ><i class="fa-sharp fa-solid fa-chart-line"  style="color:#5161ce"></i>Raise Ticket</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'employee:history'%}"
+            <a class="nav-link" href="{% url 'employee:history' id %}"
               ><i class="fa-solid fa-message"  style="color:#5161ce"></i>Ticket History</a>
           </li>
           <li class="nav-item">
@@ -75,16 +75,16 @@
           <div class="row justify-content-center my-3">
             <div class="col-lg-6">
               
-              <form action="addticket/" method="post">
-              <!---  {% csrf_token %} -->
+              <form action="{% url 'employee:create_ticket' id %}" method="post">
+              -  {% csrf_token %}
                 <label for="psno" class="form-label">PS No.</label>
                 <div class="input-group mb-4">
                   <span class="input-group-text">
                     <i class="fa fa-user" aria-hidden="true" style="color:black"></i>
                   </span>
-                  <!-- {%for x in emp %} -->
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.username}}
-                  <!-- {% endfor %} -->
+         
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.ps_number}}
+
 
                 </div>
 
@@ -93,9 +93,9 @@
                   <span class="input-group-text">
                     <i class="fa fa-envelope" aria-hidden="true" style="color:black"></i>
                   </span>
-                  <!-- {%for x in emp %} -->
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.email}}
-                  <!-- {% endfor %} -->
+  
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.email}}
+
 
                 </div>
                 
@@ -121,7 +121,7 @@
                     <i class="fa fa-folder-open" aria-hidden="true" style="color:black"></i>
                   </span>
                  
-                      <select name="categories" id="categories" class="form-control" title="Please select a sub category" required>
+                      <select name="sub_categories" id="categories" class="form-control" title="Please select a sub category" required>
                           <option  selected disabled value="">- - - - - Sub categories - - - - - -</option>
                           <option value="subcat1">SubCat 1</option>
                           <option value="subcat2">SubCat 2</option>

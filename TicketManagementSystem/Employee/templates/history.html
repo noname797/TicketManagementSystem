@@ -48,10 +48,10 @@
                       <div class="right"></div>
                   </div>
                   <li class="nav-item">
-                      <a class="nav-link" href="{% url 'employee:raiseReq' %}"><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Raise Ticket</a>
+                      <a class="nav-link" href="{% url 'employee:raiseReq' id %}"><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Raise Ticket</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="{% url 'employee:history' %}"><i class="fa-solid fa-message" style="color:#5161ce"></i>Ticket History</a>
+                      <a class="nav-link" href="{% url 'employee:history' id %}"><i class="fa-solid fa-message" style="color:#5161ce"></i>Ticket History</a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="{% url 'employee:reset' %}"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
@@ -60,37 +60,77 @@
           </div>
       </nav>
 
-      <div class="container my-5">
-          <div class="shadow-4 rounded-5 overflow-hidden">
-              <table class="table align-middle mb-0 bg-white">
-                  <thead class="bg-light" id="head">
-                      <tr>
-                          <th>Ticket ID</th>
-                          <th>PS No</th>
-                          <th>Issued Date</th>
+
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="container">
+                    <div class="shadow-4 rounded-5 overflow-hidden">
+                        <table class="table align-middle mb-0 bg-white">
+                            <thead class="bg-light" id="head">
+                                <tr>
+                                    <th>Ticket ID</th>
+                                    <th>PS No</th>
+                                    <th>Issued Date</th>
+          
+          
+                                    <th>Description</th>
+                                    <!-- <th>Status<th> -->
+                                    <th>Status</th>
+                                </tr>
+                              </thead>
+                            <tbody>
+                                {% for r in list %}
+                                  <tr>
+          
+                                  <td>{{r.id}}</td>
+                                  <td>{{r.user_id.ps_number}}</td>
+                                  <td>{{r.issue_date}}</td>
+                                  <td>{{r.description}}</td>
+                                  <td>{{r.status}}</td>
+          
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                </div>
+          
+            </div>
+
+            <div class="col-md-12 col-lg-4">
+                <div class="drop">
+                    <div class="drop__container">
+                      <header>
+                        <h1>Ticket no. :<span id="selected-date"></span></h1>
+                      </header>
+                      
+                      <div class="drop__list" id="drop-items">
+        
+                        <div id="drop__card">
+                      
+        
+        
+                        <div class="drop__card">
+                          <div class="drop__data">
+                            <div>
+                              <h1 class="drop__name">Status : {{y.status}}</h1>
+                              <br>
+                              <span class="drop__description">{{y.description}}Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum officiis eos quo facere tempora cupiditate accusantium eligendi incidunt nihil, enim odio ab, ex quidem maxime! Iste quia expedita sed aperiam?</span>
+                            </div>
+                          </div>
+                        </div>
+    
+                      </div>
+                    </div>
+                  </div>
+            </div>
 
 
-                          <th>Description</th>
-                          <!-- <th>Status<th> -->
-                          <th>Status</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      {% for r in list %}
+        </div>
 
-                       <td>{{r.id}}</td>
-                       <td>{{r.user_id.ps_number}}</td>
-                       <td>{{r.issue_date}}</td>
-                       <td>{{r.description}}</td>
-                       <td>{{r.status}}</td>
-
-      </tr>
-      {% endfor %}
-      </tbody>
-      </table>
       </div>
-      </div>
-
+      
       <script src="{% static 'history/js/jquery-3.3.1.min.js' %}"></script>
       <script src="{% static 'history/js/bootstrap.min.js' %}"></script>
       <script src="{% static 'history/js/requests_main.js' %}"></script>

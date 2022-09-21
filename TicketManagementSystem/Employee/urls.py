@@ -3,7 +3,8 @@ from Employee import views
 
 app_name = "employee"
 urlpatterns=[
-    path('ticketReq/',views.ticket_request),
+    path('raiseReq/',views.raiseReq,name='raiseReq'),
     path('reset',views.reset, name="reset"),
+    path('history',views.user_history,name ='history'),
     # path('signup',views.signup),
 ]

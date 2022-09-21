@@ -2,8 +2,11 @@ from django.shortcuts import render,HttpResponse,redirect
 
 # Create your views here.
 
-def ticket_request(request):
-    return render(request,"ticketRequest.html")
+def raiseReq(request):
+    return render(request,"raiseReq.html")
 
 def reset(request):
     return redirect("/")
+
+def user_history(request):
+    return render(request,"history.html")

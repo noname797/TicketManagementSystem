@@ -38,17 +38,18 @@ class Ticket(models.Model):
     ('processing', 'processing'),
     ('closed', 'closed'),
 ]
-    ticket_id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
+    # ticket_id = models.UUIDField(primary_key=True,editable=False,default=uuid.uuid4)
     user_id = models.ForeignKey(Profile,related_name='user',on_delete=models.CASCADE)
     status = models.CharField(max_length=100,choices=ticket_status)
     category = models.ForeignKey(Category,related_name='categoryT',on_delete=models.CASCADE) # in case future error arises convert it to char field
     subCategory = models.ForeignKey(SubCategory,related_name='subcategoryT',on_delete=models.CASCADE)
     description = models.TextField()
+    issue_date = models.DateField(auto_now_add=True)
 
     def save(self, *args,**kwargs):
         # self.slug =slugify (self.product_name)
         super(Ticket, self).save(*args,**kwargs)
 
     def __str__(self):
-        return str(self.status + " ticket ID:  " + str(self.ticket_id) + " from PS no. :" + str(self.user_id.ps_number))
+        return str(self.status + " ticket ID:  "+ self.id  + " from PS no. :" + str(self.user_id.ps_number))
 

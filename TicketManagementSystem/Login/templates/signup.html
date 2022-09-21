@@ -40,7 +40,9 @@
           <div class="row justify-content-center my-3">
             <div class="col-lg-6">
               
-              <form action="#" method="post">
+              <form action="" method="POST">
+                {% csrf_token %}
+
                 <label for="psno" class="form-label">PS No.</label>
                 <div class="input-group mb-4">
                   <span class="input-group-text">
@@ -92,7 +94,7 @@
                 <div id="message" ></div>
 
                 <div class="mb-4 text-center">
-                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="leave" value="Apply Leave">Register</button> <a href="{% url 'login:reset' %}" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
+                  <button type="submit" class="btn btn-primary pmd-ripple-effect pmd-btn-raised" name="register" value="register">Register</button> <a href="{% url 'login:reset' %}" class="btn btn-outline-secondary pmd-ripple-effect">Cancel</a>
 
                 </div>
               </form>

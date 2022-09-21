@@ -5,8 +5,7 @@
 body {
 	font-family: "Roboto", sans-serif;
 	margin: 5% 0;
-	padding: 0;
-  color: #847dff;
+  	color: #847dff;
 }
 * {
 	margin: 0;
@@ -17,19 +16,26 @@ i {
 }
 
 .container{
-
-	margin: 0px !important;
-	padding: 0;
-	max-width: 100%;
+	padding: 2%;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 1rem;
+	
 }
 .row{
 	margin: 0;
 	padding: 0;
 }
 
-  
+/* .form-control{
+	background-color: #F0F2FF ;
+}
+
+.form-control:focus{
+	background-color: #F7F8FF;
+} */
+
   i:not(i.fa-eye) {
-	color:white;
+	color:#F0F2FF;
   }
   
   ul {

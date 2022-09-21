@@ -1,6 +1,5 @@
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #EEF1FF;
   color: #847dff;
 
 }
@@ -12,7 +11,6 @@ input::-webkit-inner-spin-button{
 }
 
 p {
-  color: #EEF1FF;
   font-weight: 300; 
 }
 
@@ -32,6 +30,13 @@ a:hover {
 
 .content {
   padding: 7rem 0; 
+}
+
+.container{
+  padding: 2%;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  
 }
 
 h2 {
@@ -59,7 +64,6 @@ h2 {
   padding: 15px 15px;
   border-bottom: none;
   position: relative;
-  background: #EEF1FF;
   border-bottom: 1px solid #e6edf1; 
 }
 .content .form-group label, .content .bg .form-group label {

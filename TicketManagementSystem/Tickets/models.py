@@ -51,5 +51,5 @@ class Ticket(models.Model):
         super(Ticket, self).save(*args,**kwargs)
 
     def __str__(self):
-        return str(self.status + " ticket ID:  "+ self.id  + " from PS no. :" + str(self.user_id.ps_number))
+        return str(self.status + " ticket ID:  "+ str(self.id)  + " from PS no. :" + str(self.user_id.ps_number))
 

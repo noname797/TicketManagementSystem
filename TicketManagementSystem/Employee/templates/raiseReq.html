@@ -29,7 +29,7 @@
 
      <title>Raise Ticket</title>
   </head>
-  <body>
+  <body onload="func()">
     <nav class="navbar navbar-expand-custom navbar-mainbg">
       <a class="navbar-brand navbar-logo" href="#">
         <img src="{% static 'ticketRequest/images/lti.svg' %}" alt="LTI logo" width="10%" />
@@ -106,27 +106,65 @@
                     <i class="fa fa-folder" aria-hidden="true" style="color:black"></i>
                   </span>
                  
-                      <select name="categories" id="categories" class="form-control" title="Please select a category" required>
+                      <select onchange="select()" name="categories" id="categories" class="form-control" title="Please select a category" required>
                           <option value="" disabled selected>- - - - - - Categories - - - - -</option>
-                          <option value="cat1">Cat 1</option>
-                          <option value="cat2">Cat 2</option>
-                          <option value="cat3">Cat 3</option>
-                          <option value="cat4">Cat 4</option>
                       </select>
                 </div>
 
-                <label for="subcategories">Sub Category</label>
+                <script>
+                var data = JSON.parse("{{categories|escapejs}}")
+
+                function func(){
+                  
+                  for (cat in data){
+                    let newOption = new Option(String(cat),String(cat));
+                      document.getElementById("categories").add(newOption);
+                  }
+
+                  document.getElementById("sub_categories").innerHTML = "";
+                  currentvar = document.getElementById("categories").value;
+                  document.getElementById("sub_categories").style.display = "block";
+                  for (let i = 0; i < data[currentvar].length;i++){
+
+                    let newOption = new Option(String(data[currentvar][i]),String(data[currentvar][i]));
+                    document.getElementById("sub_categories").add(newOption);
+                  } 
+                  
+                }
+              
+
+                
+
+                  
+
+                function select(){
+                  document.getElementById("sub_categories").innerHTML = "";
+                  currentvar = document.getElementById("categories").value;
+                  document.getElementById("sub_categories").style.display = "block";
+                  for (let i = 0; i < data[currentvar].length;i++){
+
+                    let newOption = new Option(String(data[currentvar][i]),String(data[currentvar][i]));
+                    document.getElementById("sub_categories").add(newOption);
+                  } 
+
+                }
+
+                
+
+
+                
+
+
+                </script>
+
+                <label for="subcategories" >Sub Category</label>
                 <div class="mb-4 input-group">
                 <span class="input-group-text">
                     <i class="fa fa-folder-open" aria-hidden="true" style="color:black"></i>
                   </span>
                  
-                      <select name="sub_categories" id="categories" class="form-control" title="Please select a sub category" required>
+                      <select name="sub_categories" id="sub_categories" class="form-control" title="Please select a sub category" style="display:none;">
                           <option  selected disabled value="">- - - - - Sub categories - - - - - -</option>
-                          <option value="subcat1">SubCat 1</option>
-                          <option value="subcat2">SubCat 2</option>
-                          <option value="subcat3">SubCat 3</option>
-                          <option value="subcat4">SubCat 4</option>
                       </select>
                 </div>
 
@@ -150,7 +188,6 @@
           </div>
         </div>
       </section>
-      
 <script src="{% static 'ticketRequest/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'ticketRequest/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'ticketRequest/js/requests_main.js' %}"></script>

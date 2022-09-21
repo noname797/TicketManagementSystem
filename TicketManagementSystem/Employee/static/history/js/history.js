@@ -78,3 +78,22 @@ jQuery(document).ready(function($){
 // });
 
 
+
+function myFunc(x){
+	document.getElementById("selected-date").innerText = x.cells.item(0).innerText
+	document.getElementById("ticket-status").innerText = x.cells.item(4).innerText
+	document.getElementById("ticket-description").innerText = x.cells.item(3).innerText 
+
+	if (document.getElementById("ticket-status").innerText == "raised"){
+		document.getElementById("ticket-status").style.color = "grey";
+	}
+
+	else if (document.getElementById("ticket-status").innerText == "resolved"){
+		document.getElementById("ticket-status").style.color = "green";
+	}
+
+	else if (document.getElementById("ticket-status").innerText == "rejected"){
+		document.getElementById("ticket-status").style.color = "red";
+	}
+
+}

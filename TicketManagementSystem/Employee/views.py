@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from Tickets.models import Ticket, Category, SubCategory
 from Login.models import Profile
+from json import dumps
 
 # Create your views here.
 class raiseReq(APIView):
@@ -11,16 +12,44 @@ class raiseReq(APIView):
     template_name = 'raiseReq.html'
     
     def get(self, request, id):
-        categ = Category.objects.all()
+        categories = Category.objects.all()
         profile = Profile.objects.get(id=id)
         #name = profile.name
         #ps_no = profile.ps_number
-        sub = {}
-        for i in categ:
-            sub_categ = SubCategory.objects.all().filter(category=i)
-            sub[i] = sub_categ
-        print(sub)
-        return render(request,"raiseReq.html",{'id':id, 'categ':sub, 'profile':profile})
+
+        data_dict = {}
+        for category in categories:
+
+            sub_categ = SubCategory.objects.all().filter(category=category).values()
+            items = []
+
+            for i in sub_categ:
+                items.append(i['subcategory'])
+            
+            data_dict[category.category] = items
+            # items = []
+
+            # items.append(str(dict(categories)['category']))
+
+            # data_dict[category] = items
+        
+        categories = dumps(data_dict)
+        
+
+        
+
+        # sub = {}
+        # for i in categ:
+        #     sub_categ = SubCategory.objects.all().filter(category=i).values()
+        #     sub[i] = sub_categ
+        # print(sub)
+
+        context = {
+            'id':id,
+            'categories':categories,
+            'profile':profile,
+        }
+        return render(request,"raiseReq.html",context)
 
 
 class create_ticket(APIView):
@@ -48,6 +77,6 @@ class user_history(APIView):
 
 
     def get(self, request, id):
-        queryset = Ticket.objects.all().filter(user_id=id)
-        print(queryset)
+        queryset = Ticket.objects.all().filter(user_id=id).values()
+        print(queryset[0])
         return render(request,"history.html",{'list': queryset, 'id':id})

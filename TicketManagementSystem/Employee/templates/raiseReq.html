@@ -76,28 +76,25 @@
             <div class="col-lg-6">
               
               <form action="{% url 'employee:raiseReq' id %}" method="post">
-              -  {% csrf_token %}
-                <label for="psno" class="form-label">PS No.</label>
-                <div class="input-group mb-4">
-                  <span class="input-group-text">
+               {% csrf_token %}
+               <label for="psno" class="form-label" >PS No.</label>
+                <div class="mb-4 input-group">
+                <span class="input-group-text">
                     <i class="fa fa-user" aria-hidden="true" style="color:black"></i>
                   </span>
-         
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.ps_number}}
-
-
+                  <input type="text" style="width:93%" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.ps_number}}" disabled>
+    
                 </div>
 
-                <label for="email" class="form-label">Email ID</label>
-                <div class="input-group mb-4">
-                  <span class="input-group-text">
+                <label for="email"class="form-label"  >Email ID.</label>
+                <div class="mb-4 input-group">
+                <span class="input-group-text">
                     <i class="fa fa-envelope" aria-hidden="true" style="color:black"></i>
                   </span>
-  
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.email}}
-
-
+                  <input type="text" style="width:93%" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{profile.email}}" disabled>
+    
                 </div>
+
                 
                 <label for="categories"> Category</label>
                 

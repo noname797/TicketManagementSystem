@@ -1,6 +1,6 @@
 function ticketLoader(){	
 	$("document").ready(function() {
-		$('tr')[$('tr').length-1].click()
+		$('tr')[1].click()
 	})
 	$("tr").not('first').click(function() {
 		$(this).toggleClass('selected');

@@ -10,6 +10,8 @@ from json import dumps
 class raiseReq(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'raiseReq.html'
+
+
     
     def get(self, request, id):
         categories = Category.objects.all()
@@ -52,14 +54,37 @@ class raiseReq(APIView):
         return render(request,"raiseReq.html",context)
     
     def post(self, request, id):
-        category = request.POST['categories']
-        sub_category = request.POST['sub_categories']
-        description = request.POST['reason'] 
+        categories = Category.objects.all()
         profile = Profile.objects.get(id=id)
-        tic = Ticket(user_id=profile,status='raised',category=category, subCategory=sub_category, description=description)
+        data_dict = {}
+        for category in categories:
+            sub_categ = SubCategory.objects.all().filter(category=category).values()
+            items = []
+            for i in sub_categ:
+                items.append(i['subcategory'])
+            
+            data_dict[category.category] = items
+        
+        categories = dumps(data_dict)
+
+
+        context = {
+            'id':id,
+            'categories':categories,
+            'profile':profile,
+        }
+
+        user_category = request.POST['categories']
+        user_sub_category = request.POST['sub_categories']
+        user_description = request.POST['reason'] 
+        user_profile = Profile.objects.get(id=id)
+        tic = Ticket(user_id=user_profile,status='raised',category=user_category, subCategory=user_sub_category, description=user_description)
         tic.save()
-        details = Ticket.objects.all().filter(user_id=id)
-        return render(request,"history.html",{'id':id, 'list':details})
+        return render(request,"raiseReq.html",context)
+        
+       
+        # details = Ticket.objects.all().filter(user_id=id)
+        # return render(request,"history.html",{'id':id, 'list':details})
 
 
 
@@ -76,6 +101,6 @@ class user_history(APIView):
 
 
     def get(self, request, id):
-        queryset = Ticket.objects.all().filter(user_id=id).values()
+        queryset = Ticket.objects.all().filter(user_id=id).values()[::-1]
         # print(queryset[0])
         return render(request,"history.html",{'list': queryset, 'id':id})

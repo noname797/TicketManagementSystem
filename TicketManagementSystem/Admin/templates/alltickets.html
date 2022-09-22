@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- For Icons-->
+    <link rel="stylesheet" href="{% static 'alltickets/fonts/icomoon/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'alltickets/css/bootstrap.min.css' %}" />
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'alltickets/css/alltickets_style.css' %}" />
+
+     <title>All tickets</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-custom navbar-mainbg">
+          <a class="navbar-brand navbar-logo" href="#">
+              <img src="{% static 'alltickets/images/lti.svg' %}" alt="LTI logo" width="10%" />
+          </a>
+          <button class="navbar-toggler"
+                  type="button"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+              <i class="fas fa-bars text-white"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                  <div class="hori-selector">
+                      <div class="left"></div>
+                      <div class="right"></div>
+                  </div>
+                  <li class="nav-item">
+                      <a class="nav-link" href=""><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Dashboard</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href=""><i class="fa-solid fa-message" style="color:#5161ce"></i>All tickets</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href=""><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+
+
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div class="container">
+                    <div class="shadow-4 rounded-5 overflow-hidden">
+                        <table class="table align-middle mb-0 bg-white">
+                            <thead class="bg-light" id="head">
+                                <tr>
+                                    <th>Ticket ID</th>
+                                    <th>PS No</th>
+                                    <th>Issued Date</th>
+          
+          
+                                    <th>Description</th>
+                                    <!-- <th>Status<th> -->
+                                    <th>Status</th>
+                                </tr>
+                              </thead>
+                            <tbody>
+                                {% for r in list %}
+                                  <tr onclick="myFunc(this)">
+          
+                                  <td>{{r.id}}</td>
+                                  <td>{{r.user_id.ps_number}}</td>
+                                  <td>{{r.issue_date}}</td>
+                                  <td style=
+                                  "max-width:100px ;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis">{{r.description}}</td>
+                                  <td>{{r.status}}</td>
+          
+                                  </tr>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                      </div>
+                </div>
+          
+            </div> 
+
+
+        </div>
+
+       
+
+      </div>
+      
+      <script src="{% static 'alltickets/js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'alltickets/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'alltickets/js/alltickets_main.js' %}"></script>
+  </body>
+</html>

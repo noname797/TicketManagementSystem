@@ -44,7 +44,8 @@ class Ticket(models.Model):
     category = models.CharField(max_length=100) # in case future error arises convert it to char field
     subCategory = models.CharField(max_length=100)
     description = models.TextField()
-    issue_date = models.DateField(auto_now_add=True)
+    issue_date = models.DateTimeField(auto_now_add=True)
+    # modified_date = models.DateTimeField(auto_now=True)
 
     def save(self, *args,**kwargs):
         # self.slug =slugify (self.product_name)

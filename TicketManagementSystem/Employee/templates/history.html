@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{% static 'history/css/bootstrap.min.css' %}" />
 
     <!-- Style -->
-    <link rel="stylesheet" href="{% static 'history/css/history_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'history/css/history_styles.css' %}" />
 
      <title>Ticket history</title>
   </head>
@@ -70,11 +70,12 @@
                             <thead class="bg-light" id="head">
                                 <tr>
                                     <th>Ticket ID</th>
-                                    <th>PS No</th>
                                     <th>Issued Date</th>
           
           
                                     <th>Description</th>
+                                    <th style="">Category</th>
+                                    <th style="">SubCategory</th>
                                     <!-- <th>Status<th> -->
                                     <th>Status</th>
                                 </tr>
@@ -84,13 +85,14 @@
                                   <tr onclick="myFunc(this)">
           
                                   <td>{{r.id}}</td>
-                                  <td>{{r.user_id.ps_number}}</td>
                                   <td>{{r.issue_date}}</td>
                                   <td style=
                                   "max-width:100px ;
                                     white-space: nowrap;
                                     overflow: hidden;
                                     text-overflow: ellipsis">{{r.description}}</td>
+                                  <td>{{r.category}}</td>
+                                  <td>{{r.subCategory}}</td>
                                   <td>{{r.status}}</td>
           
                                   </tr>
@@ -107,7 +109,7 @@
                 <div class="drop">
                     <div class="drop__container">
                       <header>
-                        <h1>Ticket no. :<span id="selected-date"></span></h1>
+                        <h1>Ticket number: <span id="selected-ticket"></span></h1>
                       </header>
                       
                       <div class="drop__list" id="drop-items">
@@ -119,7 +121,11 @@
                         <div class="drop__card">
                           <div class="drop__data">
                             <div>
-                              <h1 class="drop__name">Status :<span id="ticket-status"></span></h1>
+                              <h1 class="drop__name">Status: <span id="ticket-status"></span></h1>
+                              <br>
+                              <h1 class="drop__category">Category: <span id="ticket-category"></span></h1>
+                              <br>
+                              <h1 class="drop__subcategory">Sub category: <span id="ticket-subcategory"></span></h1>
                               <br>
                               <span class="drop__description" id = "ticket-description"></span>
                             </div>

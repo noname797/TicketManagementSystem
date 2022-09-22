@@ -270,6 +270,19 @@ header {
 		font-weight: 500;
 	
 	}
+
+	.drop__category{
+		font-size: 1rem;
+		color: #272a3a;
+		font-weight: 500;
+	
+	}
+	.drop__subcategory{
+		font-size: 1rem;
+		color: #272a3a;
+		font-weight: 500;
+	
+	}
 	
 	.drop__description{
 		font-size: 0.813rem;

@@ -30,6 +30,10 @@
      <title>All tickets</title>
   </head>
   <body>
+    <script src="{% static 'alltickets/js/jquery-3.3.1.min.js' %}"></script>
+      <script src="{% static 'alltickets/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'alltickets/js/alltickets_main.js' %}"></script>
+      
       <nav class="navbar navbar-expand-custom navbar-mainbg">
           <a class="navbar-brand navbar-logo" href="#">
               <img src="{% static 'alltickets/images/lti.svg' %}" alt="LTI logo" width="10%" />
@@ -81,36 +85,49 @@
                               </thead>
                             <tbody>
                                 {% for r in list %}
+                                <form action="{% url 'adminn:alltickets' r.id %}" method="post">
+                                    -  {% csrf_token %}
                                   <tr onclick="myFunc(this)">
           
-                                  <td>{{r.id}}</td>
-                                  <td>{{r.user_id.ps_number}}</td>
-                                  <td>{{r.issue_date}}</td>
-                                  <td style=
+                                  <td  id = 'id' name="id">{{r.id}}</td>
+                                  <td id="ps_number" name = "ps_number" >{{r.user_id.ps_number}}</td>
+                                  <td id="issue_date" name="issue_date" >{{r.issue_date}}</td>
+                                  <td name = "description" id="description"style= 
                                   "max-width:100px ;
                                     white-space: nowrap;
                                     overflow: hidden;
                                     text-overflow: ellipsis">{{r.description}}</td>
-                                  <td>{{r.status}}</td>
+                                  <td >  <select id="changedstatus" name="changedstatus"  class="bootstrap-select" onchange="this.form.submit()">
+                                    <option value="1" selected="selected">{{r.status}}</option>
+                                    {% for x in status %}
+                                    <option value="{{x.0}}">{{x.0}}</option>
+                                    {% endfor %}
+                                 
+                                  </select></td>
           
                                   </tr>
+                                  
+                                </form>
                                   {% endfor %}
+
                               </tbody>
                           </table>
                       </div>
                 </div>
           
             </div> 
-
+            <!-- {% for choice in status %}
+            <option value="{{ choice }}">{{ choice }}</option>
+        {% endfor %} -->
 
         </div>
 
+
+      
        
 
       </div>
       
-      <script src="{% static 'alltickets/js/jquery-3.3.1.min.js' %}"></script>
-      <script src="{% static 'alltickets/js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'alltickets/js/alltickets_main_js.js' %}"></script>
+      
   </body>
 </html>

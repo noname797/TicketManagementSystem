@@ -34,7 +34,7 @@ class SubCategory(models.Model):
 
 class Ticket(models.Model):
     ticket_status = [
-    ('Raised', 'Raised'),
+    ('raised', 'raised'),
     ('processing', 'processing'),
     ('closed', 'closed'),
 ]

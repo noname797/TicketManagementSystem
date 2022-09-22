@@ -1,12 +1,4 @@
-function ticketLoader(){	
-	$("document").ready(function() {
-		$('tr')[$('tr').length-1].click()
-	})
-	$("tr").not('first').click(function() {
-		$(this).toggleClass('selected');
-  });
 
-}
 function test(){
 	var tabsNewAnim = $('#navbarSupportedContent');
 	var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
@@ -35,18 +27,11 @@ $(".navbar-toggler").click(function(){
 });
 
 
+
 function myFunc(x){
-
-	 $("tr").not('first').click(function(e) {
-		$(this).addClass('selected').siblings().removeClass('selected');
-	 });
-
-	document.getElementById("selected-ticket").innerText = x.cells.item(0).innerText
-	document.getElementById("ticket-status").innerText = x.cells.item(5).innerText
-	document.getElementById("ticket-description").innerText = x.cells.item(2).innerText 
-	document.getElementById("ticket-category").innerText = x.cells.item(3).innerText 
-	document.getElementById("ticket-subcategory").innerText = x.cells.item(4).innerText 
-
+	document.getElementById("selected-date").innerText = x.cells.item(0).innerText
+	document.getElementById("ticket-status").innerText = x.cells.item(4).innerText
+	document.getElementById("ticket-description").innerText = x.cells.item(3).innerText 
 
 	if (document.getElementById("ticket-status").innerText == "raised"){
 		document.getElementById("ticket-status").style.color = "grey";
@@ -61,4 +46,3 @@ function myFunc(x){
 	}
 
 }
-

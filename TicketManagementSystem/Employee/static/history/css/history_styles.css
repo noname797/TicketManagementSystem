@@ -18,7 +18,7 @@ i {
 .container{
 
 	margin: 0px !important;
-	padding: 0;
+	padding: 1.5%;
 	max-width: 100%;
 }
 .row{
@@ -59,14 +59,14 @@ i {
 	font-size: 15px;
 	display: block;
 	padding: 20px 20px;
-	transition-duration: 0.6s;
-	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	transition-duration: 0.1s;
+	/* transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); */
 	position: relative;
 }
 #navbarSupportedContent > ul > li.active > a {
 	color: #5161ce;
 	background-color: transparent;
-	transition: all 0.7s;
+	transition: all 0.1s;
 }
 #navbarSupportedContent a:not(:only-child):after {
 	content: "\f105";
@@ -79,7 +79,7 @@ i {
 	padding-right: 3px;
 	vertical-align: middle;
 	font-weight: 900;
-	transition: 0.5s;
+	transition: 0.1s;
 }
 #navbarSupportedContent .active > a:not(:only-child):after {
 	transform: rotate(90deg);
@@ -90,8 +90,8 @@ i {
 	height: 100%;
 	top: 0px;
 	left: 0px;
-	transition-duration: 0.7s;
-	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	transition-duration: 0.s;
+	/* transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); */
 	background-color: #fff;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
@@ -218,17 +218,13 @@ header {
 	text-decoration: none;
 	}
 	
-	img {
-	max-width: 100%;
-	height: auto;
-	}
 	  
 	.drop {
-	margin-top: 15%;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-
+		max-width: 100%;
+		margin-top: 15%;
+		display: grid;
+		/* align-items: center;
+		justify-content: center; */
 	}
 	
 	.drop__container{
@@ -237,30 +233,35 @@ header {
 		padding: 1.5rem;
 		box-shadow: 4px 4px 16px #e1e1e1;
 		border-radius: 1rem;
+
 	
 	}
 	
 	.drop__list{
 		display: grid;
 		row-gap: 1rem;
+
+
 	}
 	
 	
 	.drop__data{
 		margin-top: 0%;
 		display: flex;
+		width: 100%;
 		align-items: center;
+		
 	
 	}
 	
 	#drop__card{
 		margin-top: 1%;
-		width: 100%;
-		justify-content: space-between;
 		padding: 0.75rem 1.25rem 0.75rem 0.75rem;
 		background-color: #f8f8fc;
 		box-shadow: 4px 4px 16px #e1e1e1, -2px -2px 16px #fff;
 		border-radius: 1rem;
+
+
 	}
 	
 	
@@ -287,6 +288,9 @@ header {
 	.drop__description{
 		font-size: 0.813rem;
 		color: #8a8eaa;
+		
+		
+
 	}
 	
 	
@@ -294,5 +298,12 @@ header {
 	  
 
 
+tr:hover {
+	background-color: #dee2e6;
+	cursor: pointer;
+}
+.selected {
+	background-color: #dee2e6 !important;
+}
 
 

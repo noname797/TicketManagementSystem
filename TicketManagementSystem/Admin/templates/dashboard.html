@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{% static 'alltickets/css/bootstrap.min.css' %}" />
 
     <!-- Style -->
-    <link rel="stylesheet" href="{% static 'alltickets/css/alltickets_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'alltickets/css/alltickets_styles.css' %}" />
 
      <title>All tickets</title>
   </head>
@@ -54,7 +54,7 @@
                       <a class="nav-link" href="{% url 'adminn:alltickets' %}"><i class="fa-solid fa-message" style="color:#5161ce"></i>All tickets</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href=""><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+                      <a class="nav-link" href="{% url 'adminn:reset' %}"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
                   </li>
               </ul>
           </div>

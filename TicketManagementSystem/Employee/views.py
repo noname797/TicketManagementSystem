@@ -59,7 +59,7 @@ class raiseReq(APIView):
         tic = Ticket(user_id=profile,status='raised',category=category, subCategory=sub_category, description=description)
         tic.save()
         details = Ticket.objects.all().filter(user_id=id)
-        return render(request,"raiseReq.html",{'id':id, 'list':details})
+        return render(request,"history.html",{'id':id, 'list':details})
 
 
 
@@ -77,5 +77,5 @@ class user_history(APIView):
 
     def get(self, request, id):
         queryset = Ticket.objects.all().filter(user_id=id).values()
-        print(queryset[0])
+        # print(queryset[0])
         return render(request,"history.html",{'list': queryset, 'id':id})

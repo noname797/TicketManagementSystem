@@ -27,9 +27,13 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'history/css/history_styles.css' %}" />
 
+    <script src="{% static 'history/js/jquery-3.3.1.min.js' %}"></script>
+
      <title>Ticket history</title>
   </head>
-  <body>
+  <body onload="ticketLoader()">
+    
+
       <nav class="navbar navbar-expand-custom navbar-mainbg">
           <a class="navbar-brand navbar-logo" href="#">
               <img src="{% static 'history/images/lti.svg' %}" alt="LTI logo" width="10%" />
@@ -68,7 +72,7 @@
                     <div class="shadow-4 rounded-5 overflow-hidden">
                         <table class="table align-middle mb-0 bg-white">
                             <thead class="bg-light" id="head">
-                                <tr>
+              
                                     <th>Ticket ID</th>
                                     <th>Issued Date</th>
           
@@ -76,13 +80,13 @@
                                     <th>Description</th>
                                     <th style="display: none;">Category</th>
                                     <th style="display: none;">SubCategory</th>
-                                    <!-- <th>Status<th> -->
+
                                     <th>Status</th>
-                                </tr>
+              
                               </thead>
                             <tbody>
                                 {% for r in list %}
-                                  <tr onclick="myFunc(this)">
+                                  <tr class="" onclick="myFunc(this)">
           
                                   <td>{{r.id}}</td>
                                   <td>{{r.issue_date}}</td>
@@ -99,6 +103,7 @@
                                   {% endfor %}
                               </tbody>
                           </table>
+                          
                       </div>
                 </div>
           
@@ -127,7 +132,7 @@
                               <br>
                               <h1 class="drop__subcategory">Sub category: <span id="ticket-subcategory"></span></h1>
                               <br>
-                              <span class="drop__description" id = "ticket-description"></span>
+                              <span class="drop__description" id = "ticket-description" style="word-break: break-all;"></span>
                             </div>
                           </div>
                         </div>
@@ -135,7 +140,6 @@
                       </div>
                     </div>
                   </div>
-                  <h5 style="margin-top:10%">Click on any ticket to read more.</h5>
             </div>
              
 
@@ -146,7 +150,6 @@
 
       </div>
       
-      <script src="{% static 'history/js/jquery-3.3.1.min.js' %}"></script>
       <script src="{% static 'history/js/bootstrap.min.js' %}"></script>
       <script src="{% static 'history/js/history.js' %}"></script>
   </body>

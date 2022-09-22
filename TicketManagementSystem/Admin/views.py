@@ -25,13 +25,16 @@ class all_tickets(APIView):
 
     def get(self, request):
         # queryset = Ticket.objects.all().values()#[::-1][:10]
-        queryset = Ticket.objects.all()
+        queryset = Ticket.objects.all()[::-1]
         # profile = Profile.objects.get(id=id)
-        status_set = Ticket.ticket_status#Ticket.objects.filter(status=True).all()
+        status_set_processingandclosed = Ticket.ticket_status[1:] #Ticket.objects.filter(status=True).all()
+        status_set_closed = Ticket.ticket_status[2:]
+        print(status_set_processingandclosed)
+        print(status_set_closed)
         # print(queryset[0].status)
         # for x in status_set:
         #     print(x[0])
-        return render(request,'alltickets.html',{'list': queryset,'status':status_set})
+        return render(request,'alltickets.html',{'list': queryset,'statusprocessingandclosed':status_set_processingandclosed,'statusclosed':status_set_closed})
 
     def post(self,request,id):
         ticket = Ticket.objects.get(id=id)
@@ -49,9 +52,18 @@ class dashboard(APIView):
 
     def get(self, request):
         queryset = Ticket.objects.all().values()[::-1][:10]
-        status_set = Ticket.objects.all().values('status')    
+        status_set = Ticket.objects.all().values('status')
         print(status_set)
-        for x in status_set:
-            print(x)
-        return render(request,'dashboard.html',{'list': queryset})
+        number = {'raised':0,'processing':0,'closed':0}
+        for y in status_set:
+            if y['status'] == 'raised':
+                number['raised'] += 1
+            elif y['status'] == 'processing':
+                number['processing'] += 1
+            elif y['status'] == 'closed':
+                number['closed'] += 1
+        print(number)
+        # for x in status_set:
+        #     print(x)
+        return render(request,'dashboard.html',{'list': queryset,'value_count':number})
 

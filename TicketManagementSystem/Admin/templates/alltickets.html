@@ -86,7 +86,7 @@
                             <tbody>
                                 {% for r in list %}
                                 <form action="{% url 'adminn:alltickets' r.id %}" method="post">
-                                    -  {% csrf_token %}
+                                  {% csrf_token %}
                                   <tr onclick="myFunc(this)">
           
                                   <td  id = 'id' name="id">{{r.id}}</td>
@@ -97,11 +97,23 @@
                                     white-space: nowrap;
                                     overflow: hidden;
                                     text-overflow: ellipsis">{{r.description}}</td>
+
                                   <td >  <select id="changedstatus" name="changedstatus"  class="bootstrap-select" onchange="this.form.submit()">
                                     <option value="1" selected="selected">{{r.status}}</option>
-                                    {% for x in status %}
+                                    {% if r.status == "raised" %}
+                                    
+                                    {% for x in statusprocessingandclosed %}
                                     <option value="{{x.0}}">{{x.0}}</option>
                                     {% endfor %}
+                                    
+                                    {% elif r.status == "processing" %}
+                                   
+                                    {% for x in statusclosed %}
+                                    <option value="{{x.0}}">{{x.0}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                  
                                  
                                   </select></td>
           

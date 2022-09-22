@@ -48,13 +48,13 @@
                       <div class="right"></div>
                   </div>
                   <li class="nav-item">
-                      <a class="nav-link" href=""><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Dashboard</a>
+                      <a class="nav-link" href="{% url 'adminn:dashboard' %}"><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Dashboard</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href=""><i class="fa-solid fa-message" style="color:#5161ce"></i>All tickets</a>
+                      <a class="nav-link" href="{% url 'adminn:alltickets' %}"><i class="fa-solid fa-message" style="color:#5161ce"></i>All tickets</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link" href=""><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+                      <a class="nav-link" href="{% url 'adminn:reset' %}"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
                   </li>
               </ul>
           </div>

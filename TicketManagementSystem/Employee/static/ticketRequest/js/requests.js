@@ -78,3 +78,45 @@ jQuery(document).ready(function($){
 // });
 
 
+var data = JSON.parse("{{categories|escapejs}}")
+
+                function func(){
+                  
+                  for (cat in data){
+                    let newOption = new Option(String(cat),String(cat));
+                      document.getElementById("categories").add(newOption);
+                  }
+
+                  document.getElementById("sub_categories").innerHTML = "";
+                  currentvar = document.getElementById("categories").value;
+                  document.getElementById("sub_categories").style.display = "block";
+                  for (let i = 0; i < data[currentvar].length;i++){
+
+                    let newOption = new Option(String(data[currentvar][i]),String(data[currentvar][i]));
+                    document.getElementById("sub_categories").add(newOption);
+                  } 
+                  
+                }
+              
+
+                
+
+                  
+
+                function select(){
+                  document.getElementById("sub_categories").innerHTML = "";
+                  currentvar = document.getElementById("categories").value;
+                  document.getElementById("sub_categories").style.display = "block";
+                  for (let i = 0; i < data[currentvar].length;i++){
+
+                    let newOption = new Option(String(data[currentvar][i]),String(data[currentvar][i]));
+                    document.getElementById("sub_categories").add(newOption);
+                  } 
+
+                }
+
+                
+
+
+                
+

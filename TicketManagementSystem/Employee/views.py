@@ -50,11 +50,6 @@ class raiseReq(APIView):
             'profile':profile,
         }
         return render(request,"raiseReq.html",context)
-
-
-class create_ticket(APIView):
-    enderer_classes = [TemplateHTMLRenderer]
-    template_name = 'raiseReq.html'
     
     def post(self, request, id):
         category = request.POST['categories']
@@ -64,7 +59,11 @@ class create_ticket(APIView):
         tic = Ticket(user_id=profile,status='raised',category=category, subCategory=sub_category, description=description)
         tic.save()
         details = Ticket.objects.all().filter(user_id=id)
-        return render(request,"history.html",{'id':id, 'list':details})
+        return render(request,"raiseReq.html",{'id':id, 'list':details})
+
+
+
+    
 
 
 

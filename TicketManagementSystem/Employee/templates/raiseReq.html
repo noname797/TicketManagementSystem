@@ -75,7 +75,7 @@
           <div class="row justify-content-center my-3">
             <div class="col-lg-6">
               
-              <form action="{% url 'employee:create_ticket' id %}" method="post">
+              <form action="{% url 'employee:raiseReq' id %}" method="post">
               -  {% csrf_token %}
                 <label for="psno" class="form-label">PS No.</label>
                 <div class="input-group mb-4">
@@ -131,11 +131,6 @@
                   } 
                   
                 }
-              
-
-                
-
-                  
 
                 function select(){
                   document.getElementById("sub_categories").innerHTML = "";
@@ -190,6 +185,6 @@
       </section>
 <script src="{% static 'ticketRequest/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'ticketRequest/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'ticketRequest/js/requests_main.js' %}"></script>
+<script src="{% static 'ticketRequest/js/requests.js' %}"></script>
 </body>
 </html>

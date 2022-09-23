@@ -80,6 +80,16 @@ class raiseReq(APIView):
         user_profile = Profile.objects.get(id=id)
         tic = Ticket(user_id=user_profile,status='raised',category=user_category, subCategory=user_sub_category, description=user_description)
         tic.save()
+        mes ='Ticket has been successfully Raised.\n Check the status of your ticket in Ticket History Tab.'
+        context['success']=mes
+        #     context ={
+        #         'success' : mes,
+        #     }
+        # if tic:
+        #     mes ='Ticket has been successfully Raised.'
+        #     context ={
+        #         'success' : mes,
+        #     }
         return render(request,"raiseReq.html",context)
         
        

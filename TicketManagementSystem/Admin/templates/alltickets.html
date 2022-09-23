@@ -87,8 +87,13 @@
                                     <th>Action</th>
               
                               </thead>
+                              
                             <tbody>
+                              
                                 {% for r in list %}
+                                
+                                <form method="POST" action="{% url 'adminn:alltickets' r.id %}" >
+                                  {% csrf_token %}
                                   <tr class="" onclick="myFunc(this)">
           
                                   <td>{{r.id}}</td>
@@ -113,8 +118,10 @@
                                   </form>
                                   </td>
                                   </tr>
+                                </form>
                                   {% endfor %}
                               </tbody>
+                            
                           </table>
                           
                       </div>

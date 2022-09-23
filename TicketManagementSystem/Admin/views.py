@@ -32,6 +32,7 @@ class all_tickets(APIView):
         status_set_closed = Ticket.ticket_status[2:]
         print(status_set_processingandclosed)
         print(status_set_closed)
+        print(Ticket.objects.all()[0].id)
         # print(queryset[0].status)
         # for x in status_set:
         #     print(x[0])
@@ -39,7 +40,7 @@ class all_tickets(APIView):
 
     def post(self,request,id):
         ticket = Ticket.objects.get(id=id)
-        changed_status = request.POST['changedstatus']
+        changed_status = request.POST['admin-action']
         print(ticket.status)
         Ticket.objects.filter(id=id).update(status=changed_status)
         print('changed_status')

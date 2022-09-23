@@ -67,5 +67,20 @@ class dashboard(APIView):
         print(number)
         # for x in status_set:
         #     print(x)
-        return render(request,'dashboard.html',{'list': queryset,'value_count':number})
+        all_categ = Category.objects.all().values()
+        categ = {}
+        sub_categ = {}
+        for i in all_categ:
+            sub_cat = {}
+            sub_category = SubCategory.objects.all().filter(category_id=i['id']).values()
+            for j in sub_category:
+                sub_cat[j['subcategory']] = Ticket.objects.all().filter(subCategory=j['subcategory']).count()
+            categ[i['category']] = Ticket.objects.all().filter(category=i['category']).count()
+            sub_categ[i['category']] = sub_cat
+        print(sub_categ)
+        dict_categ = dumps(categ)
+        dict_subcat = dumps(sub_categ)
+        return render(request,'dashboard.html',{'list': queryset,'value_count':number, 'data_send':dict_categ,'data_send2':dict_subcat})
+
+        #return render(request,'dashboard.html',{'list': queryset,'value_count':number})
 

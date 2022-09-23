@@ -133,7 +133,6 @@
                                     <th>Ticket ID</th>
                                     <th>Issued Date</th>
           
-          
                                     <th>Description</th>
                                     <th style="">Category</th>
                                     <th style="">SubCategory</th>
@@ -170,12 +169,106 @@
 
 
         </div>
+
+        <div class="row">
+            <div class="col-md-12 col-lg-3">
+                <div>
+                    <canvas id="myChart1"></canvas>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div>
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div>
+                    <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-3">
+                <div>
+                    <canvas id="myChart4"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 
-
-
-                
-      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    
+   <script>
+       var canvas = document.getElementById('myChart');
+       var canvas1 = document.getElementById('myChart1');
+       var canvas2 = document.getElementById('myChart2');
+       var canvas3 = document.getElementById('myChart3');
+       var canvas4 = document.getElementById('myChart4');
+       var data_r = JSON.parse("{{data_send|escapejs}}");
+       var data_s = JSON.parse("{{data_send2|escapejs}}")
+       var label_l = []
+       var data_l = []
+       var list_l = ['myChart1','myChart2','myChart3','myChart4'];
+       var k=0
+       var barColors = ["#E8DAEF ","#82E0AA","#D0ECE7","#FAD7A0","#EC7063"];
+       for(var x in data_r){
+           label_l.push(x)
+           data_l.push(data_r[x])
+       }
+       for (var y in data_s){
+        var label_r = []
+        var data_r = []
+        for(var x in data_s[y]){
+           label_r.push(x.slice(0,10)+"...")
+           data_r.push(data_s[y][x])
+       }
+        console.log(list_l[k])
+        new Chart(list_l[k], {
+        type: "bar",
+        data: {
+            labels: label_r,
+         datasets: [{
+            // backgroundColor: barColors,
+            backgroundColor: barColors.slice(0,label_r.length),
+            data: data_r
+    }]
+  },
+  options: {
+    legend: {
+    display: false},
+    title: {
+      display: true,
+      text: "Tickets raised in category: "+y
+    }
+  }
+});
+k++;
+}
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: label_l,
+    datasets: [{
+      backgroundColor: barColors,
+      data: data_l
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Tickets raised category wise"
+    }
+  }
+});
+</script>
       
   </body>
 </html>

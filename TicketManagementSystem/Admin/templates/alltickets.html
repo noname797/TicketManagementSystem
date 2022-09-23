@@ -1,179 +1,189 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
-      rel="stylesheet"
-    />
-    <!-- For Icons-->
-    <link rel="stylesheet" href="{% static 'alltickets/fonts/icomoon/style.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'alltickets/css/bootstrap.min.css' %}" />
 
-    <!-- Style -->
-    <link rel="stylesheet" href="{% static 'alltickets/css/alltickets_styles.css' %}" />
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alltickets</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'alltickets/fonts/icomoon/style.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-    <script src="{% static 'alltickets/js/jquery-3.3.1.min.js' %}"></script>
-      <script src="{% static 'alltickets/js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'alltickets/js/alltickets_main.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'alltickets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.css">
 
-     <title>All tickets</title>
-  </head>
-  <body onload="ticketLoader()">
-    
-      
-      <nav class="navbar navbar-expand-custom navbar-mainbg">
-          <a class="navbar-brand navbar-logo" href="#">
-              <img src="{% static 'alltickets/images/lti.svg' %}" alt="LTI logo" width="10%" />
-          </a>
-          <button class="navbar-toggler"
-                  type="button"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation">
-              <i class="fas fa-bars text-white"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav ml-auto">
-                  <div class="hori-selector">
-                      <div class="left"></div>
-                      <div class="right"></div>
-                  </div>
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'adminn:dashboard' %}"><i class="fa-sharp fa-solid fa-chart-line" style="color:#5161ce"></i>Dashboard</a>
-                  </li>
-                  <li class="nav-item active">
-                      <a class="nav-link" href="{% url 'adminn:alltickets' %}"><i class="fa-solid fa-message" style="color:#5161ce"></i>All tickets</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="{% url 'adminn:reset' %}"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-
-      <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-7">
-                <div class="container" style="box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);">
-                    <div class="shadow-4 rounded-5 overflow-hidden">
-                        <table class="table align-middle mb-0 bg-white">
-                            <thead class="bg-light" id="head">
-              
-                                    <th>Ticker ID</th>
-                                    <th>Issued Date</th>
-          
-          
-                                    <th>Description</th>
-                                    <th style="display: none;">Category</th>
-                                    <th style="display: none;">SubCategory</th>
-
-                                    <th>Status</th>
-                                    <th>Action</th>
-              
-                              </thead>
-                              
-                            <tbody>
-                              
-                                {% for r in list %}
-                                
-                                <form method="POST" action="{% url 'adminn:alltickets' r.id %}" >
-                                  {% csrf_token %}
-                                  <tr class="" onclick="myFunc(this)">
-          
-                                  <td>{{r.id}}</td>
-                                  <td>{{r.issue_date}}</td>
-                                  <td style=
-                                  "max-width:100px ;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis">{{r.description}}</td>
-                                  <td style="display: none;">{{r.category}}</td>
-                                  <td style="display: none;">{{r.subCategory}}</td>
-                                  <td style="text-transform: capitalize;">{{r.status}}</td>
-                                  <td>
-                                  <form action="#" method="get">
-                                  <input type="text" name="id" value={{r.id}} style="display:none;">
-                                  <select id="admin-action" name="admin-action"  class="bootstrap-select" style="width:10rem; padding:1%;border-radius:2px;text-transform: capitalize;" Required>
-                                    <option value="" selected="selected">Select an action</option>
-                                    <option value="processing">Processing</option>
-                                    <option value="closed">Closed</option>
-                                  </select>
-                                  <button type="submit" class="btn btn-primary">Update</button>
-                                  </form>
-                                  </td>
-                                  </tr>
-                                </form>
-                                  {% endfor %}
-                              </tbody>
-                            
-                          </table>
-                          
-                      </div>
-                </div>
-          
-            </div>
-
-            <div class="col-md-12 col-lg-1">
-            </div>
-
-            <div class="col-md-12 col-lg-4">
-                <div class="drop">
-                    <div class="drop__container">
-                      <header>
-                        <h1>Ticket number: <span id="selected-ticket"></span></h1>
-                      </header>
-                      
-                      <div class="drop__list" id="drop-items">
-        
-                        <div id="drop__card">
-                      
-        
-        
-                        <div class="drop__card">
-                          <div class="drop__data">
-                            <div>
-                              <h1 class="drop__name">Status: <span id="ticket-status"></span></h1>
-                              <br>
-                              <h5 class="drop__category">Category: <span id="ticket-category"></span></h15>
-                              <br>
-                              <h5 class="drop__subcategory">Sub category: <span id="ticket-subcategory"></span></h5>
-                              <br>
-                              <span class="drop__description" id = "ticket-description" style="word-break: break-all;"></span>
-                            </div>
-                          </div>
-                        </div>
-    
-                      </div>
-                    </div>
-                  </div>
-            </div>
-             
+  <link rel="stylesheet" href="{% static 'alltickets/css/alltickets_style.css' %}">
 
 
+
+
+
+</head>
+
+<body onload="ticketLoader()">
+
+
+
+  <nav class="navbar navbar-expand-custom navbar-mainbg">
+    <a class="navbar-brand navbar-logo" href="#">
+      <img src="{% static 'alltickets/images/lti.svg'%}" alt="LTI logo" width="10%" />
+    </a>
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <div class="hori-selector">
+          <div class="left"></div>
+          <div class="right"></div>
         </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'adminn:dashboard' %}"><i class="fa-sharp fa-solid fa-chart-line"
+              style="color:#5161ce"></i>Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'adminn:alltickets' %}"><i class="fa-solid fa-message"
+              style="color:#5161ce"></i>All tickets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'adminn:reset' %}"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-       
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <div class="container" style="box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);">
+          <div class="shadow-4 rounded-5 overflow-hidden">
+            <table id="userTable" data-toggle="table" data-search="true" data-pagination="true" data-page-size="4">
+
+              <thead>
+                <tr class="bg-light" id="head">
+
+                  <th data-field="id">ID</th>
+                  <th data-field="ps_number">Ps No.</th>
+                  <th data-field="date" data-sortable="true">Issued Date</th>
+                  <!-- <th data-field="Category" data-sortable="true">Category</th>
+              <th data-field="SubCategory" data-sortable="true">SubCategory</th> -->
+              <th data-field="description">Description</th>
+                  <th data-field="status" data-sortable="true">Status</th>
+                  <th data-field="action">Action</th>
+     
+                </tr>
+              </thead>
+
+
+              <tbody>
+
+                {% for r in list %}
+
+                <!-- <form method="POST" action="{% url 'adminn:alltickets' r.id %}" > -->
+                {% csrf_token %}
+                <tr onclick="myFunc(this)" id="userRow-{{r.id}}">
+
+                  <td>{{r.id}}</td>
+                  <td>{{r.user_id}}</td>
+                  <td>{{r.issue_date}}</td>
+                  <!-- <td>{{r.category}}</td>
+              <td>{{r.subCategory}}</td> -->
+              <td style=
+              "max-width:100% ;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis">{{r.description}}</td>
+                  <td style="text-transform: capitalize;">{{r.status}}</td>
+                  <td>
+                    <form action="{% url 'adminn:alltickets' r.id %}" method="POST">
+                      <input type="text" name="id" value={{r.id}} style="display:none;">
+                      <select id="admin-action" name="admin-action" class="bootstrap-select"
+                        style="width:10rem; padding:1%;border-radius:2px;text-transform: capitalize;" Required>
+                        <option value="" selected="selected">Select an action</option>
+                        <option value="processing">Processing</option>
+                        <option value="closed">Closed</option>
+                      </select>
+                      <button type="submit" class="btn btn-primary">Update</button>
+                      
+                    </form>
+                  </td>
+                </tr>
+                <!-- </form> -->
+                {% endfor %}
+
+              </tbody>
+
+
+
+
+
+            </table>
+
+          </div>
+        </div>
 
       </div>
 
+      <!-- <div class="col-md-12 col-lg-3">
+        <div class="drop">
+          <div class="drop__container">
+            <header>
+              <h1>Ticket number: <span id="selected-ticket"></span></h1>
+            </header>
+
+            <div class="drop__list" id="drop-items">
+
+              <div id="drop__card">
 
 
-      
-  </body>
+
+                <div class="drop__card">
+                  <div class="drop__data">
+                    <div>
+                      <h1 class="drop__name">Status: <span id="ticket-status"></span></h1>
+                      <br>
+                      <h5 class="drop__category">Category: <span id="ticket-category"></span></h15>
+                        <br>
+                        <h5 class="drop__subcategory">Sub category: <span id="ticket-subcategory"></span></h5>
+                        <br>
+                        <span class="drop__description" id="ticket-description" style="word-break: break-all;"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </div>
+
+
+
+
+    <script src="{% static 'alltickets/js/jquery-3.3.1.min.js'%}"></script>
+    <!-- <script>
+  $(function() {
+    table = $("userTable")
+      $table.bootstrapTable({data: getData(20)})})
+  </script> -->
+    <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
+    <script src="{% static 'alltickets/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'alltickets/js/alltickets.js'%}"></script>
+
+
+
+</body>
+
 </html>

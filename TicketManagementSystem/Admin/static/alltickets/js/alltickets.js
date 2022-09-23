@@ -1,3 +1,12 @@
+function ticketLoader(){	
+	$("document").ready(function() {
+		$('tr')[1].click()
+	})
+	$("tr").not('first').click(function() {
+		$(this).toggleClass('selected');
+  });
+
+}
 
 function test(){
 	var tabsNewAnim = $('#navbarSupportedContent');

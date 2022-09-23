@@ -17,21 +17,16 @@ i {
 
 .container{
 
-	margin: 1%;
-	padding: 0;
+	margin: 0px !important;
+	padding: 1.5%;
 	max-width: 100%;
 }
-
-
-	
-
 .row{
 	margin: 0;
 	padding: 0;
 }
 
 /*----------bootstrap-navbar-css------------*/
-
 .navbar-logo {
 
 	color: #fff;
@@ -95,7 +90,7 @@ i {
 	height: 100%;
 	top: 0px;
 	left: 0px;
-	transition-duration: 0.0s;
+	transition-duration: 0.s;
 	/* transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); */
 	background-color: #fff;
 	border-top-left-radius: 15px;
@@ -204,8 +199,9 @@ i {
   }
   
 
+
 /* 
-Ticket Description */
+Leave desciption */
 
   
 header {
@@ -222,17 +218,13 @@ header {
 	text-decoration: none;
 	}
 	
-	img {
-	max-width: 100%;
-	height: auto;
-	}
 	  
 	.drop {
-	margin-top: 15%;
-	display: grid;
-	align-items: center;
-	justify-content: center;
-
+		max-width: 100%;
+		margin-top: 15%;
+		display: grid;
+		/* align-items: center;
+		justify-content: center; */
 	}
 	
 	.drop__container{
@@ -241,30 +233,35 @@ header {
 		padding: 1.5rem;
 		box-shadow: 4px 4px 16px #e1e1e1;
 		border-radius: 1rem;
+
 	
 	}
 	
 	.drop__list{
 		display: grid;
 		row-gap: 1rem;
+
+
 	}
 	
 	
 	.drop__data{
 		margin-top: 0%;
 		display: flex;
+		width: 100%;
 		align-items: center;
+		
 	
 	}
 	
 	#drop__card{
 		margin-top: 1%;
-		width: 100%;
-		justify-content: space-between;
 		padding: 0.75rem 1.25rem 0.75rem 0.75rem;
 		background-color: #f8f8fc;
 		box-shadow: 4px 4px 16px #e1e1e1, -2px -2px 16px #fff;
 		border-radius: 1rem;
+
+
 	}
 	
 	
@@ -274,25 +271,39 @@ header {
 		font-weight: 500;
 	
 	}
+
+	.drop__category{
+		font-size: 1rem;
+		color: #272a3a;
+		font-weight: 500;
+	
+	}
+	.drop__subcategory{
+		font-size: 1rem;
+		color: #272a3a;
+		font-weight: 500;
+	
+	}
 	
 	.drop__description{
 		font-size: 0.813rem;
 		color: #8a8eaa;
+		
+		
+
 	}
 	
 	
 	
 	  
 
-	tr:hover {
-		background-color: #dee2e6;
-		cursor: pointer;
-	}
-	.selected {
-		background-color: #dee2e6 !important;
-	}
-	
 
-
+tr:hover {
+	background-color: #dee2e6;
+	cursor: pointer;
+}
+.selected {
+	background-color: #dee2e6 !important;
+}
 
 

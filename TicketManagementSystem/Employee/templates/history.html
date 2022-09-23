@@ -99,7 +99,7 @@
                                     text-overflow: ellipsis">{{r.description}}</td>
                                   <td style="display: none;">{{r.category}}</td>
                                   <td style="display: none;">{{r.subCategory}}</td>
-                                  <td>{{r.status}}</td>
+                                  <td style="text-transform: Capitalize ;">{{r.status}}</td>
           
                                   </tr>
                                   {% endfor %}
@@ -134,7 +134,8 @@
                               <br>
                               <h1 class="drop__subcategory">Sub category: <span id="ticket-subcategory"></span></h1>
                               <br>
-                              <span class="drop__description" id = "ticket-description" style="word-break: break-all;"></span>
+                              <h3 class="drop__description">Description: <span id="ticket-description" style="word-break: break-all;""></span></h1>
+
                             </div>
                           </div>
                         </div>

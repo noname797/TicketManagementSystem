@@ -62,7 +62,7 @@ class LoginView(APIView):
             }
             return response
 
-        request.session['user_id'] = user.ps_number
+        request.session['user_id'] = user.id
         request.session['role_id'] = 1 if user.is_admin else 0
         print(request.session)
         response=Response()
@@ -160,7 +160,12 @@ def signup(request):
     return render(request,"signup.html")
 
 def reset(request):
-    return render(request,"index.html")
+    if 'user_id' not in request.session:
+        return render(request,"index.html")
+    else:
+        request.session.clear()
+        print("session has been cleared")
+        return render(request,"index.html")
 
 
 def forgotpass(request):

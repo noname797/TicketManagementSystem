@@ -171,30 +171,13 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12 col-lg-3">
+            <div class="col-md-12 col-lg-6">
                 <div>
                     <canvas id="myChart1"></canvas>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-3">
-                <div>
-                    <canvas id="myChart2"></canvas>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                <div>
-                    <canvas id="myChart3"></canvas>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-3">
-                <div>
-                    <canvas id="myChart4"></canvas>
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
+            
+            <div class="col-md-12 col-lg-6">
                 <div>
                     <canvas id="myChart"></canvas>
                 </div>
@@ -209,29 +192,32 @@
    <script>
        var canvas = document.getElementById('myChart');
        var canvas1 = document.getElementById('myChart1');
-       var canvas2 = document.getElementById('myChart2');
-       var canvas3 = document.getElementById('myChart3');
-       var canvas4 = document.getElementById('myChart4');
+    //    var canvas2 = document.getElementById('myChart2');
+    //    var canvas3 = document.getElementById('myChart3');
+    //    var canvas4 = document.getElementById('myChart4');
        var data_r = JSON.parse("{{data_send|escapejs}}");
        var data_s = JSON.parse("{{data_send2|escapejs}}")
        var label_l = []
        var data_l = []
-       var list_l = ['myChart1','myChart2','myChart3','myChart4'];
-       var k=0
-       var barColors = ["#E8DAEF ","#82E0AA","#D0ECE7","#FAD7A0","#EC7063"];
+    //    var list_l = ['myChart1','myChart2','myChart3','myChart4'];
+    //    var k=0
+       var barColors = ["#E8DAEF","#82E0AA","#D0ECE7","#FAD7A0","#EC7063","#ABB2B9","FBEEE6","#D4E6F1","#EAFAF1"];
        for(var x in data_r){
            label_l.push(x)
            data_l.push(data_r[x])
        }
+       var label_r = []
+    var data_r = []
        for (var y in data_s){
-        var label_r = []
-        var data_r = []
         for(var x in data_s[y]){
-           label_r.push(x.slice(0,10)+"...")
+           label_r.push(x.slice(0,5)+"...")
            data_r.push(data_s[y][x])
        }
-        console.log(list_l[k])
-        new Chart(list_l[k], {
+        
+// k++;
+}
+// console.log(list_l[k])
+        new Chart(myChart1, {
         type: "bar",
         data: {
             labels: label_r,
@@ -246,14 +232,12 @@
     display: false},
     title: {
       display: true,
-      text: "Tickets raised in category: "+y
+      text: "Tickets raised in sub-category",
     }
   }
 });
-k++;
-}
 new Chart("myChart", {
-  type: "pie",
+  type: "bar",
   data: {
     labels: label_l,
     datasets: [{
@@ -262,6 +246,8 @@ new Chart("myChart", {
     }]
   },
   options: {
+    legend: {
+    display: false},
     title: {
       display: true,
       text: "Tickets raised category wise"

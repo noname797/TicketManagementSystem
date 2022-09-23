@@ -11,87 +11,93 @@ class raiseReq(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'raiseReq.html'
 
-
     
     def get(self, request, id):
-        categories = Category.objects.all()
-        profile = Profile.objects.get(id=id)
-        #name = profile.name
-        #ps_no = profile.ps_number
+        if 'user_id' not in request.session:
+            print("yayy")
+            return redirect('/')
+        else:
+            categories = Category.objects.all()
+            profile = Profile.objects.get(id=id)
+            #name = profile.name
+            #ps_no = profile.ps_number
 
-        data_dict = {}
-        for category in categories:
+            data_dict = {}
+            for category in categories:
 
-            sub_categ = SubCategory.objects.all().filter(category=category).values()
-            items = []
+                sub_categ = SubCategory.objects.all().filter(category=category).values()
+                items = []
 
-            for i in sub_categ:
-                items.append(i['subcategory'])
+                for i in sub_categ:
+                    items.append(i['subcategory'])
+                
+                data_dict[category.category] = items
+                # items = []
+
+                # items.append(str(dict(categories)['category']))
+
+                # data_dict[category] = items
             
-            data_dict[category.category] = items
-            # items = []
+            categories = dumps(data_dict)
+            
 
-            # items.append(str(dict(categories)['category']))
+            
 
-            # data_dict[category] = items
-        
-        categories = dumps(data_dict)
-        
+            # sub = {}
+            # for i in categ:
+            #     sub_categ = SubCategory.objects.all().filter(category=i).values()
+            #     sub[i] = sub_categ
+            # print(sub)
 
-        
-
-        # sub = {}
-        # for i in categ:
-        #     sub_categ = SubCategory.objects.all().filter(category=i).values()
-        #     sub[i] = sub_categ
-        # print(sub)
-
-        context = {
-            'id':id,
-            'categories':categories,
-            'profile':profile,
-        }
-        return render(request,"raiseReq.html",context)
+            context = {
+                'id':id,
+                'categories':categories,
+                'profile':profile,
+            }
+            return render(request,"raiseReq.html",context)
     
     def post(self, request, id):
-        categories = Category.objects.all()
-        profile = Profile.objects.get(id=id)
-        data_dict = {}
-        for category in categories:
-            sub_categ = SubCategory.objects.all().filter(category=category).values()
-            items = []
-            for i in sub_categ:
-                items.append(i['subcategory'])
+        if 'user_id' not in request.session:
+            return redirect('/')
+        else:
+            categories = Category.objects.all()
+            profile = Profile.objects.get(id=id)
+            data_dict = {}
+            for category in categories:
+                sub_categ = SubCategory.objects.all().filter(category=category).values()
+                items = []
+                for i in sub_categ:
+                    items.append(i['subcategory'])
+                
+                data_dict[category.category] = items
             
-            data_dict[category.category] = items
-        
-        categories = dumps(data_dict)
+            categories = dumps(data_dict)
 
 
-        context = {
-            'id':id,
-            'categories':categories,
-            'profile':profile,
-        }
+            context = {
+                'id':id,
+                'categories':categories,
+                'profile':profile,
+            }
 
-        user_category = request.POST['categories']
-        user_sub_category = request.POST['sub_categories']
-        user_description = request.POST['reason'] 
-        user_profile = Profile.objects.get(id=id)
-        tic = Ticket(user_id=user_profile,status='raised',category=user_category, subCategory=user_sub_category, description=user_description)
-        tic.save()
-        mes ='Ticket has been successfully Raised.\n Check the status of your ticket in Ticket History Tab.'
-        context['success']=mes
-        #     context ={
-        #         'success' : mes,
-        #     }
-        # if tic:
-        #     mes ='Ticket has been successfully Raised.'
-        #     context ={
-        #         'success' : mes,
-        #     }
-        return render(request,"raiseReq.html",context)
-        
+            user_category = request.POST['categories']
+            user_sub_category = request.POST['sub_categories']
+            user_description = request.POST['reason'] 
+            user_profile = Profile.objects.get(id=id)
+            tic = Ticket(user_id=user_profile,status='raised',category=user_category, subCategory=user_sub_category, description=user_description)
+            tic.save()
+            mes ='Ticket has been successfully Raised.\n Check the status of your ticket in Ticket History Tab.'
+            context['success']=mes
+            #     context ={
+            #         'success' : mes,
+            #     }
+            # if tic:
+            #     mes ='Ticket has been successfully Raised.'
+            #     context ={
+            #         'success' : mes,
+            #     }
+            return render(request,"raiseReq.html",context)
+            
        
         # details = Ticket.objects.all().filter(user_id=id)
         # return render(request,"history.html",{'id':id, 'list':details})
@@ -111,6 +117,9 @@ class user_history(APIView):
 
 
     def get(self, request, id):
-        queryset = Ticket.objects.all().filter(user_id=id).values()[::-1]
-        # print(queryset[0])
-        return render(request,"history.html",{'list': queryset, 'id':id})
+        if 'user_id' not in request.session:
+            return redirect('/')
+        else:
+            queryset = Ticket.objects.all().filter(user_id=id).values()[::-1]
+            # print(queryset[0])
+            return render(request,"history.html",{'list': queryset, 'id':id})

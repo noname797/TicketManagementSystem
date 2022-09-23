@@ -1,51 +1,167 @@
 
-from multiprocessing import context
+from functools import partial
+import profile
+from urllib import response
 from django.shortcuts import render, HttpResponse,redirect
-from Login.models import Profile
-from django.contrib import messages
-from django.http import HttpResponseRedirect
-from rest_framework import generics, permissions
+from rest_framework import viewsets
+from .serializers import ProfileSerializer
+from .models import Profile
+from rest_framework.views import APIView
 from rest_framework.response import Response
-# from knox.models import AuthToken
-# from .serializers import UserSerializer, RegisterSerializer
-
+from rest_framework.exceptions import AuthenticationFailed
+import jwt, datetime
+from Employee import *
+from rest_framework.parsers import JSONParser 
 # Create your views here.
 
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class RegisterView(APIView):
+    def post(self, request):
+        print(request.data)
+        serializer = ProfileSerializer(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            #print("hi")
+            #return render(request,"index.html")
+        except:
+        #     mes ='User with this PS Number already Exists.'
+        #     context ={
+        #         'error' : mes,
+        #     }
+        #    return render(request,'signup.html',context)
+            return Response(serializer.errors)
+
+class LoginView(APIView):
+    def post(self, request):
+        ps_number = request.data['username']
+        pas= request.data['password']
+
+        #try:
+        user = Profile.objects.filter(ps_number=ps_number).first()
+        # print("user",user.password)
+        
+        if user is None:
+            # raise AuthenticationFailed("User not found")
+            response=Response()
+            response.data={
+                'detail':"User not found"
+            }
+            return response
+        if pas!=user.password:
+            print("pass incorrect")
+            # raise AuthenticationFailed('Incorrect password!')
+            response=Response()
+            response.data={
+                'detail':"Incorrect password!"
+            }
+            return response
+
+        request.session['user_id'] = user.ps_number
+        request.session['role_id'] = 1 if user.is_admin else 0
+        print(request.session)
+        response=Response()
+        response.data={
+            'id':user.id,
+            'is_admin':user.is_admin,
+        }
+        return response
+
+            # payload = {
+            #     'id': user.ps_number,
+            #     'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            #     'iat': datetime.datetime.utcnow()
+            # }
+            # print("hi")
+            # token = jwt.encode(payload, 'hi', algorithm='HS256')
+
+            # response = Response()
+
+            # response.set_cookie(key='jwt', value=token, httponly=True)
+            # response.data = {
+            #     'jwt': token
+            # }
+            # print(response,'hi')
+            #return redirect('employee:history',response)
+
+        # except:
+        #     raise AuthenticationFailed('User not found!')
+
+# class UserView(APIView):
+
+#     def get(self, request):
+#         token = request.COOKIES.get('jwt')
+#         print(token)
+
+#         if not token:
+#             raise AuthenticationFailed('Unauthenticated!')
+
+#         try:
+#             payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+#             print(payload)
+#         except jwt.ExpiredSignatureError:
+#             raise AuthenticationFailed('Unauthenticated!')
+
+#         user = Profile.objects.filter(id=payload['id']).first()
+#         serializer = ProfileSerializer(user)
+#         return Response(serializer.data)
+
+
+class LogoutView(APIView):
+    def post(self, request):
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {
+            'message': 'success'
+        }
+        return response
+
+
+class ForgotPass(APIView):
+    
+    def patch(self,request):
+        
+        try: 
+        
+            ps_number = request.data['ps_number']
+            pas= request.data['password']
+            
+            profile = Profile.objects.get(ps_number=ps_number)
+            # print("profile:",profile)
+            #da = JSONParser().parse(request)
+            
+            serializer = ProfileSerializer(profile, data={"ps_number": ps_number,"password": pas},partial=True)
+            if serializer.is_valid(): 
+                serializer.save() 
+                response=Response()
+                response.data={
+                    'message': 'Saved successfully'
+                }
+            
+                return response
+        except Profile.DoesNotExist: 
+            print("error")
+            response=Response()
+            response.data={
+                'message': 'The Profile with that ps.no does not exist'
+            }
+            
+            return response
 
 def login(request):
     return render(request,'index.html')
 
 def signup(request):
-    if request.method == 'POST':
-        psno = request.POST.get('psno')
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-
-        password = request.POST.get('password')
-        # confirmpassword = request.POST.get('confirmpassword')
-
-        print(request.POST.get('psno'))
-
-        user_obj = Profile.objects.filter(ps_number = psno)
-
-        if user_obj.exists():
-            mes ='User with this PS Number already Exists.'
-            context ={
-                'error' : mes,
-            }
-            return render(request,'signup.html',context)
-        
-        try:
-            user_obj = Profile.objects.create(ps_number=psno,name=name,email=email,password=password)
-            print(user_obj)
-            user_obj.save()
-            messages.success(request,'Account has been created successfully. You can now Login into TMS.')
-            return redirect('/')
-        except Exception as e:
-            print(e)
-            
-            messages.warning(request, 'There is some problem with the account registeration.Please contact the admin.')
-    return render(request,'signup.html',)
+    return render(request,"signup.html")
 
 def reset(request):
-    return redirect("/")
+    return render(request,"index.html")
+
+
+def forgotpass(request):
+    return render(request,"forgotpass.html")

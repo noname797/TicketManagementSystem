@@ -3,11 +3,15 @@ from rest_framework import serializers
 from Tickets.models import Category,SubCategory, Ticket
 from Login.models import Profile
 
-class UserSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Profile
-       fields = ('ps_number', 'name', 'email')
+# class UserSerializer(serializers.ModelSerializer):
+#    class Meta:
+#        model = Profile
+#        fields = ('ps_number', 'name', 'email')
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Profile
+        fields=('name','email','created_at','is_admin','ps_number',"password")
 
 class TicketSerializer(serializers.ModelSerializer):
    class Meta:

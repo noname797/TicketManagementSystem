@@ -16,7 +16,7 @@
   <!-- Style -->
   <link rel="stylesheet" href="{% static 'loginpage/css/login_styles.css' %}">
 
-  <title>Login Page</title>
+  <title>Forgot Pass Page</title>
 
 </head>
 
@@ -38,9 +38,9 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="mb-4">
-                <h3>Sign In</h3>
+                <h3>Forgot Pass</h3>
               </div>
-              <form action="{%url 'login:login-api' %}" method="post">
+              <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-group first">
                   <label for="username">PS no.</label>
@@ -64,6 +64,7 @@
                     {% endfor %}
                     {% endif %}
                 </div> -->
+                <!-- <p id="error_msg" style="color:red"></p> -->
                 <p id="error_msg" style="color:red"></p>
 
                 {% comment %} <div class="d-flex mb-5 align-items-center">
@@ -75,13 +76,13 @@
 
                 <!-- <input type="submit" value="Log In" class="btn btn-block btn-primary"> -->
                 <a href="#"><button type="submit"
-                    class="btn btn-block btn-primary">Login</button></a> <!-- {% url login:login'  -->
+                    class="btn btn-block btn-primary">Confirm</button></a> <!-- {% url login:login'  -->
             </div>
     
               </form>
               
           </div>
-          <h6 style="padding-left:30% ; margin-top:5%"> <a href="forgotpass">Forgot Password?</a>  </h6>
+          
           <h6 style="padding-left:30% ; margin-top:5%"> Not a user? click <a href="signup">here</a>  to sign up</h6>
           
 
@@ -104,20 +105,20 @@
     $(document).ready(function () {
     $("form").submit(function (event) {
       var formData = {
-        username: $("#username").val(),
-        password:$("#password").val(),
+        "ps_number": $("#username").val(),
+        "password":$("#password").val(),
       };
       console.log(formData)
       $.ajax({
-        type: "POST",
-        url: "{%url 'login:login-api' %}",
+        type: "PATCH",
+        url: "{%url 'login:forgotpass-api' %}",
         data: formData,
         dataType: "json",
         // encode: true,
         success: function (data) {
             // console.log(data);
-            if(data.detail=="User not found" ){
-                let k=data.detail;
+            if(data.message=="The Profile with that ps.no does not exist" ){
+                let k=data.message;
                 console.log(k);
                 what(k);
                 setTimeout(function(){
@@ -134,25 +135,19 @@
                 
                 // document.getElementById('error_msg').innerHTML = "This is a message";
             }
-            else if(data.detail=="Incorrect password!"){
-              // console.log("hi incorrect");
-              let k=data.detail;
-                console.log(k);
-                what(k);
-                setTimeout(function(){
-                if ($('#error_msg').length > 0) {
-                  document.getElementById("error_msg").innerHTML="";
-                }
-                }, 3000)
-            }
-            else if(data.is_admin){
-              console.log(data.is_admin);
-              window.location.replace("{%url 'adminn:dashboard' %}");
-
-            }
-            else{
-              
-              window.location.replace("{%url 'employee:raiseReq' 1%}".replace(/1/,data.id));
+            // else if(data.detail=="Incorrect password!"){
+            //   // console.log("hi incorrect");
+            //   let k=data.detail;
+            //     console.log(k);
+            //     what(k);
+            //     setTimeout(function(){
+            //     if ($('#error_msg').length > 0) {
+            //       document.getElementById("error_msg").innerHTML="";
+            //     }
+            //     }, 3000)
+            // }
+            else if(data.message=="Saved successfully"){
+              window.location.replace("{%url 'login:login'%}")
 
             }
     // load();

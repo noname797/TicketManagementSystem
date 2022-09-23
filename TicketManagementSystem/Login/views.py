@@ -12,6 +12,8 @@ from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
 from Employee import *
 from rest_framework.parsers import JSONParser 
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 # Create your views here.
 
 
@@ -23,7 +25,12 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class RegisterView(APIView):
     def post(self, request):
         print(request.data)
-        serializer = ProfileSerializer(data=request.data)
+        data_e={}
+        data_e['password']=make_password(request.data['password'])
+        data_e['ps_number']=request.data['ps_number']
+        data_e['email']=request.data['email']
+        data_e['name']=request.data['name']
+        serializer = ProfileSerializer(data=data_e)
         try:
             serializer.is_valid(raise_exception=True)
             serializer.save()
@@ -53,7 +60,8 @@ class LoginView(APIView):
                 'detail':"User not found"
             }
             return response
-        if pas!=user.password:
+        # if pas!=user.password:
+        if not check_password(pas, user.password):
             print("pass incorrect")
             # raise AuthenticationFailed('Incorrect password!')
             response=Response()
